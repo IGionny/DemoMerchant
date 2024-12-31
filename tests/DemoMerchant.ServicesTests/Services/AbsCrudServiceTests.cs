@@ -24,7 +24,7 @@ public abstract class AbsCrudServiceTests<TEntity, TService>
     public virtual async Task CreateAndGet()
     {
         // Arrange
-        using var context = new AppDbContext(Options);
+        await using var context = new AppDbContext(Options);
         var service = CreateService(context);
 
         var entity = CreateEntity();
@@ -37,7 +37,7 @@ public abstract class AbsCrudServiceTests<TEntity, TService>
         // Check if the entity has been created
         var foundEntity = await service.GetByIdAsync(createdEntity.Id.GetValueOrDefault());
         foundEntity.Should().NotBeNull();
-        CreateAndGetAssertions(entity, foundEntity);
+        CreateAndGetAssertions(entity, foundEntity!);
     }
 
     protected virtual void CreateAndGetAssertions(TEntity entity, TEntity foundEntity)

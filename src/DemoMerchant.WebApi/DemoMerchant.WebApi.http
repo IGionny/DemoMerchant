@@ -1,0 +1,6 @@
+@DemoMerchant.WebApi_HostAddress = http://localhost:5076
+
+GET {{DemoMerchant.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

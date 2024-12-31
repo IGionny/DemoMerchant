@@ -1,5 +1,4 @@
 using DemoMerchant.Sdk.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DemoMerchant.Sdk.Services;
 
@@ -25,9 +24,9 @@ public abstract class AbsService<T> : IAbsService<T> where T : AbsEntity
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync()
+    public virtual IAsyncEnumerable<T> GetAllAsync()
     {
-        return await _context.Set<T>().ToListAsync();
+        return _context.Set<T>().AsAsyncEnumerable();
     }
 
     public virtual async Task UpdateAsync(T item)
