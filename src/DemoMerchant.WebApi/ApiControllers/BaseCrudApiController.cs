@@ -9,7 +9,7 @@ namespace DemoMerchant.WebApi.ApiControllers;
 /// <summary>
 /// A basic abstract class to handle CRUD operations for an entity
 /// </summary>
-public abstract class BaseCrudApiController<TEntity, TService> : BaseApiController
+public abstract class BaseCrudApiController<TEntity, TService> : ControllerBase
     where TEntity : AbsEntity 
     where TService : IAbsService<TEntity>
 {

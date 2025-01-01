@@ -6,9 +6,9 @@ namespace DemoMerchant.WebApi.ApiControllers;
 
 [Route("api/[controller]")]
 [ApiController] //see: https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-9.0#apicontroller-attribute
-public class AddressApiController : BaseCrudApiController<Address, IAddressService>
+public class CustomerController : BaseCrudApiController<Customer, ICustomerService>
 {
-    public AddressApiController(IAddressService addressService) : base(addressService)
+    public CustomerController(ICustomerService customerService) : base(customerService)
     {
     }
 }

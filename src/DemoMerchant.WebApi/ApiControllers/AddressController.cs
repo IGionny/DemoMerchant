@@ -1,14 +1,14 @@
+using AddressServices;
 using DemoMerchant.Sdk.Domain;
 using Microsoft.AspNetCore.Mvc;
-using OrderServices;
 
 namespace DemoMerchant.WebApi.ApiControllers;
 
-[Route("api/[controller]")]
+[Route("api/[Controller]")]
 [ApiController] //see: https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-9.0#apicontroller-attribute
-public class OrderApiController : BaseCrudApiController<Order, IOrderService>
+public class AddressController : BaseCrudApiController<Address, IAddressService>
 {
-    public OrderApiController(IOrderService orderService) : base(orderService)
+    public AddressController(IAddressService addressService) : base(addressService)
     {
     }
 }

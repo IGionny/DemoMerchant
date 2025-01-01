@@ -119,4 +119,4 @@ src/.vs/config/applicationhost.config
 
 # Custom rules:
 
-src/DemoMerchant.WebApi/App_Data/*.*
+src/DemoMerchant.WebApi/App_Data

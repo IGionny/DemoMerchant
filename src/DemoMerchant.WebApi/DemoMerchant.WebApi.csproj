@@ -6,22 +6,35 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <!-- see: https://learn.microsoft.com/it-it/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-9.0&preserve-view=true#microsoftaspnetcoreopenapi-nuget-package -->
+    <PropertyGroup>
+        <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
+        <OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)</OpenApiDocumentsDirectory>
+    </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Serilog" Version="4.2.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AddressServices\AddressServices.csproj" />
       <ProjectReference Include="..\CustomerServices\CustomerServices.csproj" />
       <ProjectReference Include="..\OrderServices\OrderServices.csproj" />
       <ProjectReference Include="..\ProductServices\ProductServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="App_Data\" />
+      <Folder Include="App_Data\Data\" />
+      <Folder Include="App_Data\Logs\" />
     </ItemGroup>
 
 </Project>
