@@ -1,4 +1,7 @@
 # DemoMerchant
+
+![.NET workflow](https://github.com/IGionny/DemoMerchant/actions/workflows/dotnet.yml/badge.svg)
+
 A minimal .NET9 solution to handle a common merchant domain with a design restriction: every business service must be
 isolated: no direct references between services.
 
