@@ -62,6 +62,31 @@ public abstract class AbsCrudServiceTests<TEntity, TService>
         var foundEntity = await service.GetByIdAsync(createdEntity.Id.GetValueOrDefault());
         foundEntity.Should().BeNull();
     }
+    
+    [Fact]
+    public virtual async Task Update()
+    {
+        // Arrange
+        await using var context = new AppDbContext(Options);
+        var service = CreateService(context);
+
+        var entity = CreateEntity();
+        var createdEntity = await service.CreateAsync(entity);
+        createdEntity.Should().NotBeNull();
+        createdEntity.Id.Should().NotBeEmpty();
+        UpdateEntity(createdEntity);
+
+        // Act
+        await service.UpdateAsync(createdEntity);
+        
+        // Assert
+        // Check if the entity has been changed
+        var foundEntity = await service.GetByIdAsync(createdEntity.Id.GetValueOrDefault());
+        AssertionsAfterUpdate(entity, foundEntity);
+    }
+    
+    protected abstract void UpdateEntity(TEntity entity);
+    protected abstract void AssertionsAfterUpdate(TEntity entity, TEntity foundEntity);
 
     protected virtual void CreateAndGetAssertions(TEntity entity, TEntity foundEntity)
     {

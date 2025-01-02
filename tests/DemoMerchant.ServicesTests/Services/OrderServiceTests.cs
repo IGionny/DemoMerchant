@@ -12,6 +12,16 @@ public class OrderServiceTests : AbsCrudServiceTests<Order, OrderService>
         return new OrderService(context);
     }
 
+    protected override void UpdateEntity(Order entity)
+    {
+        entity.OrderDate = new DateTime(2020,10,12,13,14,15, DateTimeKind.Utc);
+    }
+
+    protected override void AssertionsAfterUpdate(Order entity, Order foundEntity)
+    {
+        foundEntity.OrderDate.Should().Be(new DateTime(2020, 10, 12, 13, 14, 15, DateTimeKind.Utc));
+    }
+
     protected override void CreateAndGetAssertions(Order entity, Order foundEntity)
     {
         foundEntity.Customer.Should().NotBeNull();

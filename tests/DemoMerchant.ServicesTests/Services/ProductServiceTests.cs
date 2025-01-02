@@ -12,6 +12,16 @@ public class ProductServiceTests : AbsCrudServiceTests<Product, ProductService>
         return new ProductService(context);
     }
 
+    protected override void UpdateEntity(Product entity)
+    {
+        entity.Name = "Really really good product";
+    }
+
+    protected override void AssertionsAfterUpdate(Product entity, Product foundEntity)
+    {
+        foundEntity.Name.Should().Be("Really really good product");
+    }
+
     protected override void CreateAndGetAssertions(Product entity, Product foundEntity)
     {
         foundEntity.Name.Should().Be(entity.Name);

@@ -13,6 +13,16 @@ public class CustomerServiceTests : AbsCrudServiceTests<Customer, CustomerServic
         return new CustomerService(context);
     }
 
+    protected override void UpdateEntity(Customer entity)
+    {
+        entity.Email = "foo@foo.com";
+    }
+
+    protected override void AssertionsAfterUpdate(Customer entity, Customer foundEntity)
+    {
+        foundEntity.Email.Should().Be("foo@foo.com");
+    }
+
     protected override void CreateAndGetAssertions(Customer entity, Customer foundEntity)
     {
         foundEntity.Addresses.Should().HaveCount(1);
