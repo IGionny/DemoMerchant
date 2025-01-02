@@ -4,7 +4,7 @@ namespace DemoMerchant.Sdk.Services;
 
 public abstract class AbsService<T> : IAbsService<T> where T : AbsEntity
 {
-    private readonly AppDbContext _context;
+    protected readonly AppDbContext _context;
 
     public AbsService(AppDbContext context)
     {
@@ -13,8 +13,12 @@ public abstract class AbsService<T> : IAbsService<T> where T : AbsEntity
 
     public virtual async Task<T> CreateAsync(T item)
     {
+        if (item.Id.HasValue)
+        {
+            throw new ArgumentException("Item should not have an Id when creating", nameof(item));
+        }
         item.CreatedAt = DateTime.UtcNow;
-        _context.Set<T>().Add(item);
+        _context.Set<T>().Attach(item);
         await _context.SaveChangesAsync();
         return item;
     }
@@ -35,13 +39,16 @@ public abstract class AbsService<T> : IAbsService<T> where T : AbsEntity
         await _context.SaveChangesAsync();
     }
 
-    public virtual async Task DeleteAsync(Guid id)
+    public virtual async Task<bool> DeleteAsync(Guid id)
     {
         var item = await _context.Set<T>().FindAsync(id);
         if (item != null)
         {
             _context.Set<T>().Remove(item);
             await _context.SaveChangesAsync();
+            return true;
         }
+
+        return false;
     }
 }

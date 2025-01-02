@@ -14,7 +14,7 @@ public class AddressServiceTests : AbsCrudServiceTests<Address, AddressService>
     protected override Address CreateEntity()
     {
         var address = DataMother.CreateAddress();
-        address.Id = Guid.NewGuid();
+        address.Id = null;
         return address;
     }
 }

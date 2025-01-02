@@ -16,12 +16,16 @@ public class CustomerServiceTests : AbsCrudServiceTests<Customer, CustomerServic
     protected override void CreateAndGetAssertions(Customer entity, Customer foundEntity)
     {
         foundEntity.Addresses.Should().HaveCount(1);
+        foundEntity.Addresses[0].Should().NotBeNull();
+        foundEntity.Addresses[0].Id.Should().NotBeEmpty();
+        foundEntity.Addresses[0].CustomerId.Should().Be(foundEntity.Id);
     }
 
     protected override Customer CreateEntity()
     {
         var customer = DataMother.CreateCustomer();
-        customer.Id = Guid.NewGuid();
+        customer.Id = null;
+        customer.Addresses[0].Id = null;
         return customer;
     }
 }

@@ -25,15 +25,8 @@ public class OrderServiceTests : AbsCrudServiceTests<Order, OrderService>
 
     protected override Order CreateEntity()
     {
-        var newAddress = DataMother.CreateAddress();
-        newAddress.Id = Guid.NewGuid();
-        
         var order = DataMother.CreateOrder();
-        order.Id = Guid.NewGuid();
-        
-        order.Customer!.Addresses.Add(newAddress);
-        order.ShippingAddress = newAddress;
-        
+        order.Id = null;
         return order;
     }
 }

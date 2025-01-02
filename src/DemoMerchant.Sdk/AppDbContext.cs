@@ -19,5 +19,11 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         
+        //https://learn.microsoft.com/en-us/ef/core/saving/cascade-delete#database-cascade-limitations
+        modelBuilder.Entity<Address>()
+            .HasOne<Customer>()
+            .WithMany(c => c.Addresses)
+            .HasForeignKey(a => a.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

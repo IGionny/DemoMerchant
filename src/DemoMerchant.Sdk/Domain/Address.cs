@@ -17,4 +17,10 @@ public class Address : AbsEntity
     [MaxLength(50)] [Required] public string ZipCode { get; set; } = string.Empty;
 
     [MaxLength(255)] [Required] public string Country { get; set; } = string.Empty;
+    
+    
+    /// <summary>
+    /// A reference to the Customer entity
+    /// </summary>
+    public Guid? CustomerId { get; set; }
 }

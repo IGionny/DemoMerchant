@@ -1,6 +1,7 @@
 ﻿using DemoMerchant.Sdk;
 using DemoMerchant.Sdk.Domain;
 using DemoMerchant.Sdk.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerServices;
 
@@ -14,4 +15,3 @@ public class CustomerService : AbsService<Customer>, ICustomerService
     {
     }
 }
-

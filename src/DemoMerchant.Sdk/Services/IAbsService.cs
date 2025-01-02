@@ -8,5 +8,5 @@ public interface IAbsService<T> where T: AbsEntity
     Task<T?> GetByIdAsync(Guid id);
     IAsyncEnumerable<T> GetAllAsync();
     Task UpdateAsync(T item);
-    Task DeleteAsync(Guid id);
+    Task<bool> DeleteAsync(Guid id);
 }

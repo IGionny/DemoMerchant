@@ -22,7 +22,7 @@ public class ProductServiceTests : AbsCrudServiceTests<Product, ProductService>
     protected override Product CreateEntity()
     {
         var product = DataMother.CreateProduct();
-        product.Id = Guid.NewGuid();
+        product.Id = null;
         return product;
     }
 }

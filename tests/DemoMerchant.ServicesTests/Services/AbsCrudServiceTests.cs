@@ -39,6 +39,29 @@ public abstract class AbsCrudServiceTests<TEntity, TService>
         foundEntity.Should().NotBeNull();
         CreateAndGetAssertions(entity, foundEntity!);
     }
+    
+    [Fact]
+    public virtual async Task Delete()
+    {
+        // Arrange
+        await using var context = new AppDbContext(Options);
+        var service = CreateService(context);
+
+        var entity = CreateEntity();
+        var createdEntity = await service.CreateAsync(entity);
+        createdEntity.Should().NotBeNull();
+        createdEntity.Id.Should().NotBeEmpty();
+
+        // Act
+        var resultDelete = await service.DeleteAsync(createdEntity!.Id!.Value);
+        
+        // Assert
+        resultDelete.Should().BeTrue();
+        
+        // Check if the entity has been deleted
+        var foundEntity = await service.GetByIdAsync(createdEntity.Id.GetValueOrDefault());
+        foundEntity.Should().BeNull();
+    }
 
     protected virtual void CreateAndGetAssertions(TEntity entity, TEntity foundEntity)
     {
