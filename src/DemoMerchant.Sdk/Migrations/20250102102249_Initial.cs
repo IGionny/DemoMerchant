@@ -65,7 +65,8 @@ namespace DemoMerchant.Sdk.Migrations
                         name: "FK_Addresses_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 },
                 comment: "Address entity: used by Customer and Order");
 

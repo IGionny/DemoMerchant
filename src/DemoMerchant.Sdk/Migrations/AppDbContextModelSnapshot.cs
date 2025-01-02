@@ -232,7 +232,8 @@ namespace DemoMerchant.Sdk.Migrations
                 {
                     b.HasOne("DemoMerchant.Sdk.Domain.Customer", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DemoMerchant.Sdk.Domain.Order", b =>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMerchant.Sdk.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241231175232_Initial")]
+    [Migration("20250102102249_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -235,7 +235,8 @@ namespace DemoMerchant.Sdk.Migrations
                 {
                     b.HasOne("DemoMerchant.Sdk.Domain.Customer", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DemoMerchant.Sdk.Domain.Order", b =>
